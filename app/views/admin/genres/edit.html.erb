@@ -1,15 +1,19 @@
-<h2>ジャンル編集</h2>
-<%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch  do |f| %>
+<div class="container my-5">
+  <div class="row">
+    <h2>ジャンル編集</h2>
+    
+  </div>
 
-<div>
-  ジャンル名
-</div>
-
-<div>
-  <%= f.text_field :name %>
-</div>
-
-<div>
-  <%= f.submit "変更を保存" %>
+  <div class="row flex-column align-items-center mt-3">
+    <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch  do |f| %>
+    <div class="form-group row">
+      ジャンル名
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    
+    <div class="row">
+        <%= f.submit "変更を保存", class: "btn btn-success" %>
+    </div>
+  </div>
 </div>
 <% end %>

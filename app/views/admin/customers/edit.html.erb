@@ -1,0 +1,33 @@
+<h2>会員情報編集</h2>
+
+<%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
+
+<div>
+  <%= f.label :会員id %>
+  <%= f.label @customer.id %>
+</div>
+
+<div>
+  <%= f.label :氏名 %>
+</div>
+
+<div>
+  <%= f.label :郵便番号 %>
+</div>
+
+<div>
+  <%= f.label :住所 %>
+</div>
+
+<div>
+  <%= f.label :メールアドレス %>
+  <%= f.email_field :email %>
+</div>
+
+<div>
+  <%= f.label :会員ステータス %>
+</div>
+
+<%= f.submit "変更を保存", class: "btn btn-primary mt-3 mx-auto" %>
+
+<% end %>
