@@ -47,7 +47,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       #電話番号
       t.string :telephon_number
       #大会ステータス
-      t.boolean :is_active
+      t.boolean :is_active, default: true
       #登録日時
       t.datetime :create_at
       #更新日時

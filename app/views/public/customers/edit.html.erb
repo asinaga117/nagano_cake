@@ -1,0 +1,43 @@
+<h2>会員情報編集</h2>
+
+<%= form_with model:@customer,url:public_customers_path, method: :patch do |f|%>
+
+  <div>
+    <%= f.label :"氏名"%>
+    <%= f.text_field :last_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  
+  <div>
+    <%= f.label :"フリガナ"%>
+    <%= f.text_field :last_name_kana %>
+    <%= f.text_field :first_name_kana %>
+  </div>
+
+  <div>
+    <%= f.label :"郵便番号"%>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div>
+    <%= f.label :"住所"%>
+    <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :"電話番号"%>
+    <%= f.text_field :telephon_number %>
+  </div>
+
+  <div>
+    <%= f.label :"メールアドレス"%>
+    <%= f.text_field :email %>
+  </div>
+  
+  <div>
+    <%= f.submit "編集内容を保存する" %>
+    <%= link_to "退会する", public_quite_customer_path %>
+  </div>
+
+
+<% end %>
