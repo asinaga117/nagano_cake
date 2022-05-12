@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
- 
+
+  namespace :public do
+    get 'cart_items/index'
+  end
   namespace :admin do
-    
+
     get 'top' => 'homes#top'
-    
+
     get 'about' => 'homes#about'
 
-    
+
     resources :genres, only: [:index, :create, :edit, :update]
 
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
@@ -17,12 +20,12 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
-    
+
     get 'top' => 'homes#top'
-    
+
     get 'about' => 'homes#about'
 
-    
+
     get "customers/quite" => 'customers#quite', as: 'quite_customer'
     #論理削除
     patch '/customers/:id/out' => 'customers#out', as: 'out'
@@ -33,8 +36,10 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index,:edit, :create, :update, :destroy ]
 
     resources :orders, only: [:index,:show, :new, :confirm, :complete]
-    
+
     resources :items, only: [:index,:show]
+    
+    resources :cart_items, only: [:index, :update, :create, :destroy]
 
   end
 
@@ -43,16 +48,16 @@ Rails.application.routes.draw do
   devise_for :admins,skip: [:resistrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
-  
+
+
 
   #顧客用
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
- 
+
+
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

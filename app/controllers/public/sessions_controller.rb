@@ -33,5 +33,12 @@ class Public::SessionsController < Devise::SessionsController
       end
     end
     
+    def after_sign_in_path_for(resource)
+    #flash[:notice] = "登録しました"
+
+    public_top_path
+    end
+
+    
     
 end

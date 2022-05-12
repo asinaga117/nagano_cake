@@ -1,16 +1,18 @@
+<%= render "public/header" %>
+
 <h1>商品一覧</h1>
 <h4>全<%= @item.count %>件</h4>
 
 <% @item.each do |item| %>
       <div>
-        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
-          <%= link_to item_path(item.id) do %>
-          <p><%= attachment_image_tag item, :image, size: "180x130", fallback: "no_image.jpg" %></p>
+        <div>
+          <%= link_to public_item_path(item.id) do %>
+          <p><%= image_tag item.image,  size: "180x130" %></p>
           <% end %>
         <div>
           <p><%= item.name %></p>
           <% if item.is_active == true %>
-          <p>¥<%= (item.price * 1.08).to_i.to_s(:delimited, delimiter: ',') %></p>
+          <p>¥<%= item.price %></p>
           <% else %>
           <p>売り切れ</p>
         <% end %>
