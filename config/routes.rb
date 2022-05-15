@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'cart_items/index'
-  end
+root 'public/homes#top'
+
   namespace :admin do
 
     get 'top' => 'homes#top'
@@ -35,10 +34,12 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index,:edit, :create, :update, :destroy ]
 
-    resources :orders, only: [:index,:show, :new, :confirm, :complete]
+    resources :orders, only: [:index,:show, :new ]
 
     resources :items, only: [:index,:show]
-    
+
+    delete 'cart_items/alldestroy' => 'cart_items#destroy_all'
+
     resources :cart_items, only: [:index, :update, :create, :destroy]
 
   end
