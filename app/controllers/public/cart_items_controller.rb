@@ -9,6 +9,12 @@ class Public::CartItemsController < ApplicationController
     @cart_item.save!
     redirect_to public_cart_items_path
   end
+  
+  def update
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.update(cart_items_params)
+    redirect_to public_cart_items_path
+  end
 
   def destroy
     @cart_item = CartItem.find(params[:id])

@@ -1,0 +1,32 @@
+<h2>注文情報確認</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <% @cart_items.each do |cart| %>
+    <tr>
+      <td class="text-left">
+        <%= attachment_image_tag( cart.item, :image, size: "60x50") %>
+        <%= cart.item.name %>
+      </td>
+      <td class="text-right">
+        ¥<%= cart.item.tax_in_price.to_s(:delimited) %>
+      </td>
+      <td class="text-right">
+        <%= cart.count %>
+      </td>
+      <td class="text-right">
+        ¥<%= sub_price(cart).to_s(:delimited) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

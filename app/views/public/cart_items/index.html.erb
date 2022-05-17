@@ -22,7 +22,7 @@
 
     <th>
       <%= form_with model:i, url: public_cart_item_path(i), method: :patch  do |f| %>
-        <%= f.number_field :count, size: 10, min: 1 %>
+        <%= f.number_field :amount, size: 10, min: 1 %>
         <%= f.submit "変更" %>
       <% end %>
     </th>

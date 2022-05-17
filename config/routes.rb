@@ -34,7 +34,12 @@ root 'public/homes#top'
 
     resources :addresses, only: [:index,:edit, :create, :update, :destroy ]
 
+    post 'orders/confirm' => 'orders#confirm'
+    
+    post 'orders/complete' => 'orders#complete'
+    
     resources :orders, only: [:index,:show, :new ]
+    
 
     resources :items, only: [:index,:show]
 
