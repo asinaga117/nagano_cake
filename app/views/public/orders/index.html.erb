@@ -26,13 +26,19 @@
     	</td>
     	
     	<td>
+    	  <% order.order_items.each do |order_item| %>
+    	  <%= order_item.item.name %>
+    	  <% end %>
+    	</td>
+    	
+    	<td>
     	  <%= order.total_payment %>円
     	</td>
     	<td>
     		<%= order.status %>
     	</td>
       <td>
-       	<%= link_to "注文詳細", order_path %>
+       	<%= link_to "注文詳細", public_order_path(order) %>
        </td>
     </tr>
     <% end %>

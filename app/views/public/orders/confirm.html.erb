@@ -11,9 +11,9 @@
       <th>小計</th>
     </tr>
   </thead>
-  
+
   <tbody>
-  <% @total_payment = 0 %>  
+  <% @total_payment = 0 %>
   <% @cart_items.each do |cart| %>
     <tr>
       <td>
@@ -36,7 +36,7 @@
 </table>
 
 <table>
-  
+
   <tr>
     <th>送料</th>
     <td>￥<%= @total_shipping = 800 %></td>
@@ -71,13 +71,14 @@
 </table>
 
 <h3>
-  <%= form_with model: @order, url: public_orders_complete_path, method: :post do |f|%>
-  
+  <%= form_with model: @order, url: public_orders_path, method: :post do |f|%>
+
   <%= f.hidden_field :payment_method %>
   <%= f.hidden_field :postal_code%>
   <%= f.hidden_field :address%>
   <%= f.hidden_field :name%>
-  <%= f.hidden_field :total_payment%>
+  <%= f.hidden_field :total_payment, :value => @total_shipping + @total_payment %>
+  <%= f.hidden_field :status, :value => "入金待ち" %>
   <%= f.submit '注文を確定する'%>
   <% end %>
 </h3>

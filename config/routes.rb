@@ -36,9 +36,9 @@ root 'public/homes#top'
 
     post 'orders/confirm' => 'orders#confirm'
     
-    post 'orders/complete' => 'orders#complete'
+    get 'orders/complete' => 'orders#complete'
     
-    resources :orders, only: [:index,:show, :new ]
+    resources :orders, only: [:index,:show, :new, :create ]
     
 
     resources :items, only: [:index,:show]

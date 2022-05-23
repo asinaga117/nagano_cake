@@ -1,13 +1,17 @@
 <%= render "admin/header" %>
 
-<div class="container my-5">
-  <div class="row">
-    <h2>ジャンル一覧・追加</h2>
+<div class="container">
+  <div class="row text-left">
+    <div class="col-md-12 mt-5">
+      <h2>ジャンル一覧・追加</h2>
+    </div>
   </div>
-
-  <%= form_with model: @genre, url: "/admin/genres", method: :post  do |f| %>
   
-  <div class="d-flex justify-content-start">
+  <div class="row my-5 d-flex justify-content-left">
+    <div class="col-xs-12">
+      <%= form_with model: @genre, url: admin_genres_path, method: :post  do |f| %>
+  
+  <div class="d-flex justify-content-left">
     <div class="p-4">
       <span>ジャンル名</span>
     </div>

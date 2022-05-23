@@ -1,47 +1,49 @@
     <%= render "admin/header" %>
 
+    <div class="container">
+      <h2 class="mt-5 text-center">商品詳細</h2>
+        <div class="row align-items-center m-5">
+          <div class="col-lg text-center mb-5">
+            <%= image_tag @item.image, :size => '300x250' %>
+          </div>
     
-    <h2>商品詳細</h2>
-
-    <div>
-      <%= image_tag @item.image   %>
-    </div>
+          <div class="col-lg">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>商品名</td>
+                  <td><%= @item.name %></td>
+                </tr>
+      
+                <tr>
+                  <td>商品説明</td>
+                  <td><%= @item.introduction %></td>
+                </tr>
+      
+                <tr>
+                  <td>ジャンル</td>
+                  <td><%= @item.genre.name %></td>
+                </tr>
+      
+                <tr>
+                  <td>税込価格(税抜価格)</td>
+                  <td>
+                    <%= @item.price %>円
+                  </td>
+                </tr>
+      
+                <tr>
+                  <td>販売ステータス</td>
+                  <td><%= @item.is_active %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
     
-    <div>
-      <table>
-        <tbody>
-          <tr>
-            <td>商品名</td>
-            <td><%= @item.name %></td>
-          </tr>
-
-          <tr>
-            <td>商品説明</td>
-            <td><%= @item.introduction %></td>
-          </tr>
-
-          <tr>
-            <td>ジャンル</td>
-            <td><%= @item.genre.name %></td>
-          </tr>
-
-          <tr>
-            <td>税込価格(税抜価格)</td>
-            <td>
-              <%= @item.price %>円
-            </td>
-          </tr>
-
-          <tr>
-            <td>販売ステータス</td>
-            <td><%= @item.is_active %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <div>
-      <%= link_to "編集する", edit_admin_item_path(@item) %>
+          <div class="d-flex justify-content-around">
+            <%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success' %>
+          </div>
+        </div>
     </div>
   
     

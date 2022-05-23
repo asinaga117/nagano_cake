@@ -1,44 +1,60 @@
 <%= render "admin/header" %>
 
-
-<h2>商品編集</h2>
-
-<%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
-
-<div>
-  <%= f.label :image, "商品画像" %>
-  <%= f.file_field :image, accept: "image/*" %>
+<div class="container">
+  <h2 class="text-center my-5">商品編集</h2>
+  <div class="row">
+    <div class="col-8 offset-2 mb-5">
+      <%= form_with model: @item, url: admin_item_path(@item.id), method: :patch do |f| %>
+      
+      <table>
+        <tr>
+          <div class="form-group">
+            <%= f.label :image, "商品画像", class: "form_label" %>
+            <%= f.file_field :image, accept: "image/*",class: "mb-3 ml-3" %>
+          </div>
+        </tr>
+        
+        <tr>
+          <div class="form-group">
+            <%= f.label :name, "商品名", class: "form_label"  %>
+            <%= f.text_field :name,class: "form-control mb-3" %>
+          </div>
+        </tr>
+        <tr>
+          <div class="form-group">
+            <%= f.label :introduction, "商品説明",class: "form_label" %>
+            <%= f.text_area :introduction, size: "50x5",class: "form-control form-control-lg mb-3" %>
+          </div>
+        </tr>
+        <tr>
+          <div>
+            <%= f.label :genre_id, "ジャンル", class: "form_label" %>
+            <%= f.select :genre_id, [["ケーキ", "1"], ["プリン", "2"]], include_blank: "選択して下さい", class: "form-select" %>
+          </div>
+        </tr>
+        <tr>
+          <div>
+            <%= f.label :price, "値段(税抜き)",class: "form_label" %>
+            <%= f.text_field :price %>円
+          </div>
+        </tr>
+        <tr>
+          <div>
+            <%= f.label :is_active, "販売ステータス" %>
+            <%= f.radio_button :is_active, :on_sale, checked: "checked"%>
+            <%= f.label :is_active, "販売中" %>
+            <%= f.radio_button :is_active, :off_sale %>
+            <%= f.label :is_active, "販売停止中" %>
+          </div>
+        </tr>
+        <tr>
+          <div>
+            <%= f.submit "変更を保存", class: "btn btn-success" %>
+          </div>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div>
-  <%= f.label :name, "商品名" %>
-  <%= f.text_field :name %>
-</div>
-
-<div>
-  <%= f.label :introduction, "商品説明" %>
-  <%= f.text_area :introduction %>
-</div>
-
-<div>
-  <%= f.label :genre_id, "ジャンル" %>
-  <%= f.select :genre_id, [["ケーキ", "1"], ["プリン", "2"]], include_blank: "選択して下さい" %>
-</div>
-
-<div>
-  <%= f.label :price, "値段(税抜き)" %>
-  <%= f.text_field :price %>円
-</div>
-
-<div>
-  <%= f.label :is_active, "販売ステータス" %>
-  <%= f.radio_button :is_active, :on_sale, checked: "checked"%>
-  <%= f.label :is_active, "販売中" %>
-  <%= f.radio_button :is_active, :off_sale %>
-  <%= f.label :is_active, "販売停止中" %>
-</div>
-
-<%= f.submit "変更を保存" %>
-
-
-<% end %>
