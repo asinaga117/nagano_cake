@@ -4,10 +4,19 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    @cart_item = CartItem.new(cart_items_params)
-    @cart_item.customer_id = current_customer.id
-    @cart_item.save!
+    @cart_item = current_customer.cart_items.new(cart_items_params)
+    @plus_cart_item = CartItem.find_by(item_id: @cart_item.item_id)
+    if @plus_cart_item.present? && @cart_item.valid?
+    @cart_item.amount += @plus_cart_item.amount
+    @plus_cart_item.destroy
+    end
+    if @cart_item.save
     redirect_to public_cart_items_path
+    else
+    @item = Item.find(params[:cart_item][:item_id])
+    @cart_item = CartItem.new
+    render "public/items/show"
+    end
   end
   
   def update
@@ -32,6 +41,7 @@ class Public::CartItemsController < ApplicationController
   
   
   def cart_items_params
-    params.require(:cart_item).permit( :amount, :item_id)
+    params.require(:cart_item).permit(:amount, :item_id)
+    
   end
 end

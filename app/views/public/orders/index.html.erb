@@ -2,7 +2,7 @@
 
 <h2>注文履歴一覧</h2>
 
-<table>
+<table class="table table-hover table-bordered table-condensed">
   <thead>
     <tr>
       <th>注文日</th>
@@ -38,7 +38,7 @@
     		<%= order.status %>
     	</td>
       <td>
-       	<%= link_to "注文詳細", public_order_path(order) %>
+       	<%= link_to "表示する", public_order_path(order) %>
        </td>
     </tr>
     <% end %>

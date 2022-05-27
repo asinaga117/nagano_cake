@@ -1,13 +1,19 @@
 <%= render "public/header" %>
 
-<h1>商品一覧</h1>
-<h4>全<%= @item.count %>件</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 px-sm-0">
+      <h1>商品一覧</h1>
+      <h4>全<%= @items.count %>件</h4>
+    </div>
+  </div>
 
-<% @item.each do |item| %>
+  <div class="row mt-3 mb-3 text-center text-xs-center text-sm-center text-md-left">
+    <% @items.each do |item| %>
       <div>
-        <div>
+        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
           <%= link_to public_item_path(item.id) do %>
-          <p><%= image_tag item.image,  size: "180x130" %></p>
+          <p class="img-wrap"><%= image_tag item.image,  size: "180x130" %></p>
           <% end %>
         <div>
           <p><%= item.name %></p>
@@ -16,4 +22,11 @@
           <% else %>
           <p>売り切れ</p>
         <% end %>
-<% end %>
+    <% end %>
+    <%= paginate @items %>
+  </div>
+</div>
+
+
+
+

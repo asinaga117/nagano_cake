@@ -26,6 +26,7 @@ class Public::OrdersController < ApplicationController
           order_item.order_id = @order.id
           order_item.save
         end
+        current_customer.cart_items.destroy_all
         redirect_to public_orders_complete_path
       else
         @order = Order.new(order_params)

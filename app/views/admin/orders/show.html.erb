@@ -1,33 +1,83 @@
 <%= render "admin/header" %>
 
-
-<h2>注文詳細</h2>
-
-<table>
-  <tr>
-    <td>購入者</td>
-  </tr>
+<div class="container">
+  <h2>注文詳細</h2>
+  <div class="row justify-content-center">
+    <div class="col-xs-12">
+      <table class="table table-borderless">
+        <tr>
+          <th>購入者</th>
+          <td><%= @order.name %></td>
+        </tr>
+      
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S")%></td>
+        </tr>
+      
+        <tr>
+          <th>配送先</th>
+          <td>
+            〒
+            <%= @order.postal_code %>
+            <%= @order.address %>
+            <p><%= @order.name %></p>
+          </td>
+        </tr>
+      
+        <tr>
+          <th>支払方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
   
-  <tr>
-    <td>注文日</td>
-  </tr>
-
-  <tr>
-    <td>配送先</td>
-  </tr>
-  
-  <tr>
-    <td>支払方法</td>
-  </tr>
-</table>
-
-
-<table>
-  <thead>
-    <th>商品名</th>
-    <th>単価(税込み)</th>
-    <th>数量</th>
-    <th>小計</th>
-    <th>製作ステータス</th>
-  </thead>
-</table>
+  <div class="row justify-content-center">
+    <div class="col-xs-8">
+      <table class="table table-bordered">
+        <thead>
+          <th>商品名</th>
+          <th>単価(税込み)</th>
+          <th>数量</th>
+          <th>小計</th>
+        </thead>
+        <tbody>
+          <% @order.order_items.each do |order_items|%>
+          
+          <tr>
+            <td><p><%= order_items.item.name%></p></td>
+            <td><p><%= order_items.item.with_tax_price %></p></td>
+            <td><p><%= order_items.amount%></p></td>
+            <td><p><%= order_items.subtotal_order_item %></p></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="col-xs-3 off-set-1">
+      <table class="table">
+        <tr>
+          <th>送料</th>
+          <td class="text-right col-xs-5">¥<%= 800 %></td>
+        </tr>
+        
+        <tr>
+          <th>商品合計</th>
+          <td class="text-right col-xs-5">¥<%= @order_items.sum(&:subtotal_order_item) %></td>
+        </tr>
+        
+        <tr>
+          <th>請求金額</th>
+          <td class="text-right col-xs-5">¥<%= @order_items.sum(&:subtotal_order_item) + 800 %>円</td>
+        </tr>
+        
+        <tr>
+          <th></th>
+          <td><%= link_to "注文履歴へ戻る", admin_orders_path%></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
